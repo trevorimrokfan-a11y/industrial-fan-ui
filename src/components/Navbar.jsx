@@ -1,18 +1,20 @@
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-
-const navItems = [
-  { label: 'Products', to: '/products' },
-  { label: 'Applications', to: '/applications' },
-  { label: 'Solutions', to: '/' },
-  { label: 'Support', to: '/' },
-  { label: 'About Us', to: '/' },
-  { label: 'Contact', to: '/' },
-]
+import { useLanguage } from '../context/LanguageContext'
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
   const location = useLocation()
+  const { lang, toggle, t } = useLanguage()
+
+  const navItems = [
+    { label: t.nav.products, to: '/products' },
+    { label: t.nav.applications, to: '/applications' },
+    { label: t.nav.solutions, to: '/' },
+    { label: t.nav.support, to: '/' },
+    { label: t.nav.aboutUs, to: '/' },
+    { label: t.nav.contact, to: '/' },
+  ]
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-[#0A0E1A]/95 backdrop-blur border-b border-gray-800">
@@ -32,7 +34,7 @@ export default function Navbar() {
         <nav className="hidden lg:flex items-center gap-6">
           {navItems.map((item) => (
             <Link
-              key={item.label}
+              key={item.to + item.label}
               to={item.to}
               className={`text-sm transition-colors ${
                 location.pathname === item.to
@@ -47,22 +49,26 @@ export default function Navbar() {
 
         {/* Right actions */}
         <div className="flex items-center gap-3">
+          {/* Search */}
           <button className="text-gray-400 hover:text-white transition-colors">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
           </button>
-          <button className="text-gray-400 hover:text-white transition-colors">
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-            </svg>
-          </button>
-          <button className="text-gray-400 hover:text-white text-xs flex items-center gap-1">
+
+          {/* Language Toggle */}
+          <button
+            onClick={toggle}
+            className="flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-gray-700 hover:border-blue-500 text-gray-300 hover:text-white transition-all text-xs font-medium"
+            title={lang === 'en' ? '切换到中文' : 'Switch to English'}
+          >
             <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/>
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/>
             </svg>
-            EN
+            <span className="w-7 text-center">{lang === 'en' ? 'EN' : '中文'}</span>
           </button>
+
           {/* Mobile menu btn */}
           <button
             className="lg:hidden text-gray-400 hover:text-white"
@@ -80,7 +86,7 @@ export default function Navbar() {
         <div className="lg:hidden bg-[#0F1624] border-t border-gray-800 px-6 py-4 space-y-3">
           {navItems.map((item) => (
             <Link
-              key={item.label}
+              key={item.to + item.label}
               to={item.to}
               onClick={() => setMenuOpen(false)}
               className="block text-sm text-gray-300 hover:text-white py-1"
@@ -88,6 +94,16 @@ export default function Navbar() {
               {item.label}
             </Link>
           ))}
+          <button
+            onClick={toggle}
+            className="flex items-center gap-2 text-sm text-gray-300 hover:text-white py-1"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/>
+            </svg>
+            {lang === 'en' ? '切换到中文' : 'Switch to English'}
+          </button>
         </div>
       )}
     </header>
