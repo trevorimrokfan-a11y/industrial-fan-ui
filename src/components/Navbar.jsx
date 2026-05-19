@@ -8,6 +8,7 @@ export default function Navbar() {
   const { lang, toggle, t } = useLanguage()
 
   const navItems = [
+    { label: t.nav.home, to: '/' },
     { label: t.nav.products, to: '/products' },
     { label: t.nav.applications, to: '/applications' },
     { label: t.nav.solutions, to: '/solutions' },
