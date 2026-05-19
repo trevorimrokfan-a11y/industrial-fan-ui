@@ -2,36 +2,261 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  box-sizing: border-box;
+/* ═══════════════════════════════════════════════════
+   THEME VARIABLES
+   Applied via [data-theme="..."] on the root div
+═══════════════════════════════════════════════════ */
+
+/* ── Dark (original) ── */
+[data-theme="dark"] {
+  --bg-base:        #0A0E1A;
+  --bg-surface:     #111827;
+  --bg-elevated:    #0F1624;
+  --bg-deep:        #060A14;
+
+  --border-base:    #1f2937;   /* gray-800 */
+  --border-light:   #374151;   /* gray-700 */
+
+  --text-primary:   #ffffff;
+  --text-secondary: #9ca3af;   /* gray-400 */
+  --text-muted:     #6b7280;   /* gray-500 */
+  --text-faint:     #4b5563;   /* gray-600 */
+
+  --accent:         #2563eb;   /* blue-600 */
+  --accent-hover:   #3b82f6;   /* blue-500 */
+  --accent-subtle:  rgba(37,99,235,0.15);
+  --accent-text:    #60a5fa;   /* blue-400 */
+
+  --nav-bg:         rgba(10,14,26,0.95);
+  --scrollbar-track:#0A0E1A;
+  --scrollbar-thumb:#374151;
+
+  --card-shadow:    none;
+  --hero-glow:      rgba(30,58,138,0.15);
 }
+
+/* ── Silver / 银灰 ── */
+[data-theme="silver"] {
+  --bg-base:        #1a1f2e;
+  --bg-surface:     #242b3d;
+  --bg-elevated:    #1e2535;
+  --bg-deep:        #141929;
+
+  --border-base:    #2d3650;
+  --border-light:   #3d4a6a;
+
+  --text-primary:   #e8ecf4;
+  --text-secondary: #8fa3c8;
+  --text-muted:     #6b81a8;
+  --text-faint:     #4a5f82;
+
+  --accent:         #4f7cdb;
+  --accent-hover:   #6b94e8;
+  --accent-subtle:  rgba(79,124,219,0.15);
+  --accent-text:    #7baaf0;
+
+  --nav-bg:         rgba(26,31,46,0.96);
+  --scrollbar-track:#1a1f2e;
+  --scrollbar-thumb:#3d4a6a;
+
+  --card-shadow:    0 2px 12px rgba(0,0,0,0.35);
+  --hero-glow:      rgba(79,124,219,0.12);
+}
+
+/* ── White / 白灰 ── */
+[data-theme="white"] {
+  --bg-base:        #f0f2f7;
+  --bg-surface:     #ffffff;
+  --bg-elevated:    #e8eaf2;
+  --bg-deep:        #d8dce8;
+
+  --border-base:    #d1d5e0;
+  --border-light:   #b8bdd0;
+
+  --text-primary:   #0f172a;
+  --text-secondary: #475569;
+  --text-muted:     #64748b;
+  --text-faint:     #94a3b8;
+
+  --accent:         #1d4ed8;
+  --accent-hover:   #2563eb;
+  --accent-subtle:  rgba(29,78,216,0.08);
+  --accent-text:    #1d4ed8;
+
+  --nav-bg:         rgba(240,242,247,0.95);
+  --scrollbar-track:#f0f2f7;
+  --scrollbar-thumb:#b8bdd0;
+
+  --card-shadow:    0 1px 8px rgba(0,0,0,0.08);
+  --hero-glow:      rgba(29,78,216,0.07);
+}
+
+/* ═══════════════════════════════════════════════════
+   GLOBAL TOKEN USAGE
+═══════════════════════════════════════════════════ */
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
   font-family: 'Inter', sans-serif;
-  background-color: #0A0E1A;
-  color: #fff;
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-@layer components {
-  .btn-primary {
-    @apply bg-blue-600 hover:bg-blue-500 text-white px-5 py-2.5 rounded text-sm font-medium transition-colors;
-  }
-  .btn-outline {
-    @apply border border-gray-600 hover:border-gray-400 text-white px-5 py-2.5 rounded text-sm font-medium transition-colors;
-  }
-  .nav-link {
-    @apply text-gray-300 hover:text-white text-sm transition-colors;
-  }
-  .section-label {
-    @apply text-blue-400 text-xs uppercase tracking-widest font-semibold;
-  }
-  .card-dark {
-    @apply bg-[#111827] border border-gray-800 rounded-xl;
-  }
+/* Sections / backgrounds */
+.theme-bg-base     { background-color: var(--bg-base); }
+.theme-bg-surface  { background-color: var(--bg-surface); }
+.theme-bg-elevated { background-color: var(--bg-elevated); }
+.theme-bg-deep     { background-color: var(--bg-deep); }
+
+/* Borders */
+.theme-border      { border-color: var(--border-base); }
+.theme-border-light{ border-color: var(--border-light); }
+
+/* Text */
+.theme-text        { color: var(--text-primary); }
+.theme-text-sec    { color: var(--text-secondary); }
+.theme-text-muted  { color: var(--text-muted); }
+
+/* Accent */
+.theme-accent      { color: var(--accent-text); }
+
+/* ═══════════════════════════════════════════════════
+   COMPONENT OVERRIDES using CSS vars
+   (works across all 3 themes)
+═══════════════════════════════════════════════════ */
+
+/* Navbar */
+header.theme-nav {
+  background-color: var(--nav-bg) !important;
+  border-bottom-color: var(--border-base) !important;
+  backdrop-filter: blur(12px);
 }
+
+/* Cards */
+.card-dark {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-base);
+  border-radius: 0.75rem;
+  box-shadow: var(--card-shadow);
+}
+
+/* Buttons */
+.btn-primary {
+  @apply px-5 py-2.5 rounded text-sm font-medium transition-colors;
+  background-color: var(--accent);
+  color: #fff;
+}
+.btn-primary:hover { background-color: var(--accent-hover); }
+
+.btn-outline {
+  @apply px-5 py-2.5 rounded text-sm font-medium transition-colors;
+  border: 1px solid var(--border-light);
+  color: var(--text-primary);
+}
+.btn-outline:hover { border-color: var(--accent); color: var(--accent-text); }
+
+/* Nav links */
+.nav-link { color: var(--text-secondary); font-size: 0.875rem; transition: color 0.15s; }
+.nav-link:hover { color: var(--text-primary); }
+
+/* Section label */
+.section-label {
+  @apply text-xs uppercase tracking-widest font-semibold;
+  color: var(--accent-text);
+}
+
+/* ── Page section backgrounds via CSS vars ── */
+/* We override Tailwind hardcoded bg colors with attribute selectors */
+
+[data-theme="silver"] .bg-\[\#0A0E1A\],
+[data-theme="white"]  .bg-\[\#0A0E1A\] { background-color: var(--bg-base) !important; }
+
+[data-theme="silver"] .bg-\[\#111827\],
+[data-theme="white"]  .bg-\[\#111827\] { background-color: var(--bg-surface) !important; }
+
+[data-theme="silver"] .bg-\[\#0F1624\],
+[data-theme="white"]  .bg-\[\#0F1624\] { background-color: var(--bg-elevated) !important; }
+
+[data-theme="silver"] .bg-\[\#060A14\],
+[data-theme="white"]  .bg-\[\#060A14\] { background-color: var(--bg-deep) !important; }
+
+[data-theme="silver"] .bg-\[\#0A1428\],
+[data-theme="white"]  .bg-\[\#0A1428\] { background-color: var(--bg-elevated) !important; }
+
+/* Borders */
+[data-theme="silver"] .border-gray-800,
+[data-theme="white"]  .border-gray-800 { border-color: var(--border-base) !important; }
+
+[data-theme="silver"] .border-gray-700,
+[data-theme="white"]  .border-gray-700 { border-color: var(--border-light) !important; }
+
+/* Text */
+[data-theme="silver"] .text-gray-400,
+[data-theme="white"]  .text-gray-400 { color: var(--text-secondary) !important; }
+
+[data-theme="silver"] .text-gray-500,
+[data-theme="white"]  .text-gray-500 { color: var(--text-muted) !important; }
+
+[data-theme="silver"] .text-gray-600,
+[data-theme="white"]  .text-gray-600 { color: var(--text-faint) !important; }
+
+[data-theme="silver"] .text-gray-300,
+[data-theme="white"]  .text-gray-300 { color: var(--text-primary) !important; }
+
+[data-theme="silver"] .text-white,
+[data-theme="white"]  .text-white { color: var(--text-primary) !important; }
+
+/* Accent text */
+[data-theme="silver"] .text-blue-400,
+[data-theme="white"]  .text-blue-400 { color: var(--accent-text) !important; }
+
+[data-theme="silver"] .text-blue-600,
+[data-theme="white"]  .text-blue-600 { color: var(--accent) !important; }
+
+/* Accent bg */
+[data-theme="silver"] .bg-blue-600,
+[data-theme="white"]  .bg-blue-600 { background-color: var(--accent) !important; }
+
+[data-theme="silver"] .bg-blue-600\/20,
+[data-theme="white"]  .bg-blue-600\/20 { background-color: var(--accent-subtle) !important; }
+
+/* White theme: hero glow adjustments */
+[data-theme="white"] .bg-blue-900\/15 { background-color: var(--hero-glow) !important; }
+[data-theme="white"] .bg-blue-950\/30 { background-color: rgba(29,78,216,0.05) !important; }
+[data-theme="white"] .bg-blue-900\/10 { background-color: var(--hero-glow) !important; }
+[data-theme="white"] .bg-blue-900\/40 { background-color: rgba(29,78,216,0.06) !important; }
+[data-theme="silver"] .bg-blue-900\/15 { background-color: var(--hero-glow) !important; }
+[data-theme="silver"] .bg-blue-950\/30 { background-color: rgba(79,124,219,0.08) !important; }
+
+/* White theme: inputs */
+[data-theme="white"] input,
+[data-theme="white"] textarea,
+[data-theme="white"] select {
+  background-color: var(--bg-surface) !important;
+  border-color: var(--border-base) !important;
+  color: var(--text-primary) !important;
+}
+[data-theme="white"] input::placeholder,
+[data-theme="white"] textarea::placeholder { color: var(--text-faint) !important; }
+
+[data-theme="silver"] input,
+[data-theme="silver"] textarea,
+[data-theme="silver"] select {
+  background-color: var(--bg-surface) !important;
+  border-color: var(--border-base) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Transition for theme switch */
+*, *::before, *::after {
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.2s ease;
+}
+/* But don't animate transforms/opacity (breaks animations) */
+img, svg { transition: none !important; }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #0A0E1A; }
-::-webkit-scrollbar-thumb { background: #374151; border-radius: 3px; }
+::-webkit-scrollbar-track { background: var(--scrollbar-track); }
+::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 3px; }
