@@ -1,6 +1,6 @@
 # Industrial Fan UI Prototype
 
-ARCTIC-inspired industrial cooling fan catalog website.
+-inspired industrial cooling fan catalog website.
 
 ## Install
 
