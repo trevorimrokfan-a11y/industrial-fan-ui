@@ -1,6 +1,7 @@
 const zh = {
   // Navbar
   nav: {
+    home: '首页',
     products: '产品中心',
     applications: '应用方案',
     solutions: '解决方案',
