@@ -1,13 +1,37 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-body {
-  margin: 0;
-  font-family: Inter, sans-serif;
+* {
+  box-sizing: border-box;
 }
 
-html.dark {
-  color-scheme: dark;
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #0A0E1A;
+  color: #fff;
 }
+
+@layer components {
+  .btn-primary {
+    @apply bg-blue-600 hover:bg-blue-500 text-white px-5 py-2.5 rounded text-sm font-medium transition-colors;
+  }
+  .btn-outline {
+    @apply border border-gray-600 hover:border-gray-400 text-white px-5 py-2.5 rounded text-sm font-medium transition-colors;
+  }
+  .nav-link {
+    @apply text-gray-300 hover:text-white text-sm transition-colors;
+  }
+  .section-label {
+    @apply text-blue-400 text-xs uppercase tracking-widest font-semibold;
+  }
+  .card-dark {
+    @apply bg-[#111827] border border-gray-800 rounded-xl;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #0A0E1A; }
+::-webkit-scrollbar-thumb { background: #374151; border-radius: 3px; }
