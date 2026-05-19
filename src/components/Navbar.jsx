@@ -10,10 +10,10 @@ export default function Navbar() {
   const navItems = [
     { label: t.nav.products, to: '/products' },
     { label: t.nav.applications, to: '/applications' },
-    { label: t.nav.solutions, to: '/' },
-    { label: t.nav.support, to: '/' },
-    { label: t.nav.aboutUs, to: '/' },
-    { label: t.nav.contact, to: '/' },
+    { label: t.nav.solutions, to: '/solutions' },
+    { label: t.nav.support, to: '/support' },
+    { label: t.nav.aboutUs, to: '/about' },
+    { label: t.nav.contact, to: '/contact' },
   ]
 
   return (
