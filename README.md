@@ -1,21 +1,25 @@
-# Industrial Fan UI Prototype
 
--inspired industrial cooling fan catalog website.
+# Industrial Fan Pro Max
+
+Included Features:
+
+- Figma-level UI Structure
+- Dark Mode
+- GSAP Animation
+- 3D Fan Hero
+- Fan Selector
+- RFQ System
+- Datasheet Download Center
+- SEO Structure
+- AI Server Cooling Section
+- Multi-language Switcher
+- WordPress Ready Architecture
+- Product Database Structure
 
 ## Install
 
-```bash
 npm install
-```
 
 ## Run
 
-```bash
 npm run dev
-```
-
-## Build
-
-```bash
-npm run build
-```

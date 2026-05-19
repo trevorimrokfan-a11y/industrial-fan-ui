@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -5,4 +6,8 @@
 body {
   margin: 0;
   font-family: Inter, sans-serif;
+}
+
+html.dark {
+  color-scheme: dark;
 }
