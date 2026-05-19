@@ -1,6 +1,7 @@
 const en = {
   // Navbar
   nav: {
+    home: 'Home',
     products: 'Products',
     applications: 'Applications',
     solutions: 'Solutions',
